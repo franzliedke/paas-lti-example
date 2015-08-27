@@ -1,8 +1,11 @@
 <?php
 
-$tool = include __DIR__.'/lti.php';
+include __DIR__.'/src/lti.php';
 
+$tool = new TestProvider(new LTI_Data_Connector_None);
 $tool->execute();
+
+$serialized = base64_encode(serialize($_POST));
 
 ?>
 <!DOCTYPE html>
@@ -33,6 +36,7 @@ $tool->execute();
 		<form action="submit.php" method="post">
 			<label for="solution">Your solution</label>
 			<input type="text" name="solution" id="solution" />
+			<input type="hidden" name="payload" value="<?php echo $serialized; ?>" />
 			<input type="submit" />
 		</form>
 	</div>
