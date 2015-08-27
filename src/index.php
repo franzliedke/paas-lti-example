@@ -1,3 +1,10 @@
+<?php
+
+$tool = include __DIR__.'/lti.php';
+
+$tool->execute();
+
+?>
 <!DOCTYPE html>
 <html>
 
