@@ -4,6 +4,11 @@
     "require": {
         "franzl/lti": "dev-master"
     },
+    "autoload": {
+        "psr-4": {
+            "Franzl\\LtiExample\\": "src/"
+        }
+    },
     "authors": [
         {
             "name": "Franz Liedke",

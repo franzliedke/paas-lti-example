@@ -1,8 +1,11 @@
 <?php
 
-include __DIR__.'/src/lti.php';
+include __DIR__.'/common.php';
 
-$tool = new TestProvider(new LTI_Data_Connector_None);
+use Franzl\LtiExample\TestProvider;
+use Franzl\Lti\Storage\DummyStorage;
+
+$tool = new TestProvider(new DummyStorage);
 $tool->execute();
 
 $serialized = base64_encode(serialize($_POST));

@@ -1,6 +1,6 @@
 <?php
 
-include __DIR__.'/src/lti.php';
+include __DIR__.'/common.php';
 
 $solution = isset($_POST['solution']) ? $_POST['solution'] : '';
 
@@ -9,8 +9,10 @@ $solution = isset($_POST['solution']) ? $_POST['solution'] : '';
 $_POST = unserialize(base64_decode($_POST['payload']));
 #var_dump($_POST);exit;
 
+use Franzl\LtiExample\TestProvider;
+use Franzl\Lti\Storage\DummyStorage;
 
-$tool = new TestProvider(new LTI_Data_Connector_None);
+$tool = new TestProvider(new DummyStorage);
 $tool->execute();
 
 $user = $tool->user;
