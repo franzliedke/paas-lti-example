@@ -1,0 +1,14 @@
+{
+    "name": "franzl/example-lti-task",
+    "description": "LTI playground",
+    "require": {
+        "franzl/lti": "dev-master"
+    },
+    "authors": [
+        {
+            "name": "Franz Liedke",
+            "email": "franz@develophp.org"
+        }
+    ],
+    "minimum-stability": "dev"
+}
