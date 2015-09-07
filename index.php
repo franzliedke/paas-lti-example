@@ -5,10 +5,21 @@ include __DIR__.'/common.php';
 use Franzl\LtiExample\TestProvider;
 use Franzl\Lti\Storage\DummyStorage;
 
-$tool = new TestProvider(new DummyStorage);
-$tool->execute();
+try {
+	$tool = new TestProvider(new DummyStorage);
+	$tool->handleRequest($request);
+} catch (Exception $e) {
+	echo '<h1>Exception!</h1>';
+	echo '<pre>';
+	echo $e->getMessage()."\n";
+	echo $e->getTraceAsString();
+	echo '</pre>';
+	echo '<pre>';var_dump($tool);echo '</pre>';
+	echo '<pre>';var_dump($request);echo '</pre>';
+	exit;
+}
 
-$serialized = base64_encode(serialize($_POST));
+$serialized = base64_encode(serialize($request));
 
 ?>
 <!DOCTYPE html>
@@ -34,7 +45,7 @@ $serialized = base64_encode(serialize($_POST));
 <body>
 	<div class="container">
 		<h1>Welcome</h1>
-		<p class="intro">Please solve the following task</p>
+		<p class="intro">Hello <?= $tool->user->firstName ?>. Please solve the following task</p>
 
 		<form action="submit.php" method="post">
 			<label for="solution">Your solution</label>
@@ -42,7 +53,9 @@ $serialized = base64_encode(serialize($_POST));
 			<input type="hidden" name="payload" value="<?php echo $serialized; ?>" />
 			<input type="submit" />
 		</form>
+
 	</div>
+	<?php echo '<pre>';var_dump($tool);echo '</pre>'; ?>
 </body>
 
 </html>
